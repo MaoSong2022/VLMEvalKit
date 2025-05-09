@@ -3,9 +3,9 @@ from PIL import Image
 from abc import abstractproperty
 import sys
 import os.path as osp
-from .base import BaseModel
-from ..smp import *
-from ..dataset import DATASET_TYPE
+from ..base import BaseModel
+from ...smp import *
+from ...dataset import DATASET_TYPE
 import copy
 
 
@@ -17,9 +17,9 @@ class Eagle(BaseModel):
                  model_path='NVEagle/Eagle-X5-7B',
                  **kwargs):
         try:
-            from eagle.model.builder import load_pretrained_model
-            from eagle.utils import disable_torch_init
-            from eagle.mm_utils import get_model_name_from_path
+            from .model.builder import load_pretrained_model
+            from .utils import disable_torch_init
+            from .mm_utils import get_model_name_from_path
         except Exception as e:
             logging.critical('''Please install eagle before using Eagle,
             you can install it from "https://github.com/NVlabs/EAGLE.git"''')
@@ -51,11 +51,10 @@ class Eagle(BaseModel):
 
     def generate_inner(self, message, dataset=None):
         try:
-            from eagle import conversation as conversation_lib
-            from eagle.constants import (IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN,
+            from .constants import (IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN,
                                          DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN)
-            from eagle.conversation import conv_templates, SeparatorStyle
-            from eagle.mm_utils import tokenizer_image_token, process_images, KeywordsStoppingCriteria
+            from .conversation import conv_templates, SeparatorStyle
+            from .mm_utils import tokenizer_image_token, process_images, KeywordsStoppingCriteria
         except Exception as e:
             logging.critical('''Please install eagle before using Eagle,
             you can install it from "https://github.com/NVlabs/EAGLE.git"''')

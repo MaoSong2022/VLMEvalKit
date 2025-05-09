@@ -6,7 +6,7 @@ from .aria import Aria
 from .base import BaseModel
 from .cogvlm import CogVlm, GLM4v
 from .emu import Emu, Emu3_chat, Emu3_gen
-from .eagle_x import Eagle
+from .eagle.eagle_x import Eagle
 from .idefics import IDEFICS, IDEFICS2
 from .instructblip import InstructBLIP
 from .kosmos import Kosmos2
