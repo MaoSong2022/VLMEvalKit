@@ -1,6 +1,5 @@
 import torch
 from PIL import Image
-from abc import abstractproperty
 import sys
 import os.path as osp
 from ..base import BaseModel
@@ -150,9 +149,7 @@ class LLaVA(BaseModel):
         prompt += "ASSISTANT: "
 
         images = [Image.open(s).convert("RGB") for s in images]
-        args = abstractproperty()
-        args.image_aspect_ratio = "pad"
-        image_tensor = process_images(images, self.image_processor, args).to(
+        image_tensor = process_images(images, self.image_processor, dict()).to(
             "cuda", dtype=torch.float16
         )
 
@@ -191,12 +188,8 @@ class LLaVA(BaseModel):
         content, images = self.concat_tilist(message)
 
         images = [Image.open(s).convert("RGB") for s in images]
-        args = abstractproperty()
-        args.image_aspect_ratio = "pad"
         if images:
-            image_tensor = process_images(images, self.image_processor, args).to(
-                "cuda", dtype=torch.float16
-            )
+            image_tensor = process_images(images, self.image_processor, dict())
         else:
             image_tensor = None
 
