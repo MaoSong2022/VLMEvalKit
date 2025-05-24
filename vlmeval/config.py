@@ -552,6 +552,22 @@ qwen_series = {
 }
 
 llava_series = {
+    "llava_sequence_append_13b": partial(
+        LLaVA,
+        model_path="/cpfs04/user/maosong/ICCV_vision_conflicts/llava-sequence-append",
+    ),
+    "llava_channel_append_13b": partial(
+        LLaVA,
+        model_path="shijiay/llava_clipdino224_stage2",
+    ),
+    "llava_clip224_stage2": partial(
+        LLaVA,
+        model_path="shijiay/llava_clip224_stage2",
+    ),
+    "llava_dinov2_stage2": partial(
+        LLaVA,
+        model_path="shijiay/llava_dinov2_stage2",
+    ),
     "llava_v1.5_7b": partial(LLaVA, model_path="liuhaotian/llava-v1.5-7b"),
     "llava_v1.5_13b": partial(LLaVA, model_path="liuhaotian/llava-v1.5-13b"),
     "llava_v1_7b": partial(LLaVA, model_path=LLAVA_V1_7B_MODEL_PTH),
