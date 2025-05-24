@@ -41,6 +41,13 @@ from vlmeval.inference_video import infer_data_job_video
 from vlmeval.inference_mt import infer_data_job_mt
 from vlmeval.smp import *
 from vlmeval.utils.result_transfer import MMMU_result_transfer, MMTBench_result_transfer
+from loguru import logger
+import datetime
+
+logger.add(
+    f"logs/run_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.log", mode="w"
+)
+
 
 
 def build_model_from_config(cfg, model_name, use_vllm=False):
@@ -188,7 +195,7 @@ You can launch the evaluation by setting either --data and --model or --config.
 
 
 def main():
-    logger = get_logger('RUN')
+    # logger = get_logger('RUN')
     args = parse_args()
     use_config, cfg = False, None
     if args.config is not None:
