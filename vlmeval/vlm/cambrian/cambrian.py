@@ -1,8 +1,7 @@
 import torch
 from PIL import Image
-from .base import BaseModel
-from ..smp import *
-import warnings
+from ..base import BaseModel
+from ...smp import *
 
 IMAGE_TOKEN_INDEX = -200
 DEFAULT_IMAGE_TOKEN = '<image>'
@@ -18,9 +17,9 @@ class Cambrian(BaseModel):
     def __init__(self, model_path='nyu-visionx/cambrian-8b', **kwargs):
         assert model_path is not None
         try:
-            from cambrian.conversation import conv_templates, SeparatorStyle
-            from cambrian.model.builder import load_pretrained_model
-            from cambrian.mm_utils import tokenizer_image_token, process_images, get_model_name_from_path
+            from .conversation import conv_templates
+            from .model.builder import load_pretrained_model
+            from .mm_utils import tokenizer_image_token, process_images, get_model_name_from_path
         except Exception as e:
             logging.critical('Please install cambrian from https://github.com/cambrian-mllm/cambrian.')
             raise e

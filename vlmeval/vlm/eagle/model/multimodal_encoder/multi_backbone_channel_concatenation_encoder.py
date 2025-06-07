@@ -42,7 +42,7 @@ class MultiBackboneChannelConcatenationVisionTower(nn.Module):
         vision_tower_name_list = vision_tower.split(";")
         self.input_image_size = 1024  # hardcode
 
-        self.mask_vision_tower_index = [0, 1, 3, 4]
+        self.mask_vision_tower_index = [0, 4]
         logger.info(
             f"Masking features from vision tower {self.mask_vision_tower_index}"
         )
@@ -139,7 +139,9 @@ class MultiBackboneChannelConcatenationVisionTower(nn.Module):
         for index, vision_tower in enumerate(self.vision_towers):
             # use dummy feature for masked vision tower
             if index in self.mask_vision_tower_index:
-                dummy_feature = torch.zeros(self.index2shape[index], dtype=x.dtype).to(x.device)
+                tensor_shape = self.index2shape[index]
+                tensor_shape[0] = b
+                dummy_feature = torch.zeros(tensor_shape, dtype=x.dtype).to(x.device)
                 features.append(dummy_feature)
                 continue
 
