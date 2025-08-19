@@ -43,7 +43,7 @@ from .xcomposer import (
 )
 from .yi_vl import Yi_VL
 from .internvl import InternVLChat
-from .deepseek_vl import DeepSeekVL
+from .deepsek_vl.deepseek_vl import DeepSeekVL
 from .deepseek_vl2 import DeepSeekVL2
 from .janus import Janus
 from .mgm import Mini_Gemini

@@ -45,7 +45,9 @@ from loguru import logger
 import datetime
 
 logger.add(
-    f"logs/run_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.log", mode="w"
+    f"logs/run_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.log",
+    mode="w",
+    enqueue=True,
 )
 
 
@@ -373,6 +375,7 @@ def main():
                     **(json.loads(args.judge_args) if args.judge_args else {}),
                 }
 
+                logger.info(f"args.retry: {args.retry}, args.judge: {args.judge}")
                 if args.retry is not None:
                     judge_kwargs['retry'] = args.retry
                 if args.judge is not None:

@@ -42,7 +42,7 @@ class MultiBackboneChannelConcatenationVisionTower(nn.Module):
         vision_tower_name_list = vision_tower.split(";")
         self.input_image_size = 1024  # hardcode
 
-        self.mask_vision_tower_index = [0, 4]
+        self.mask_vision_tower_index = [0, 1, 3]
         logger.info(
             f"Masking features from vision tower {self.mask_vision_tower_index}"
         )
@@ -120,12 +120,21 @@ class MultiBackboneChannelConcatenationVisionTower(nn.Module):
         self.image_processor.crop_size = {"height": 1024, "width": 1024}
         self.is_loaded = True
 
+        ## Eagle-X5-7B
+        # self.index2shape = {
+        #     0: [1, 1024, 1024],
+        #     1: [1, 1024, 3072],
+        #     2: [1, 1024, 1024],
+        #     3: [1, 1024, 1024],
+        #     4: [1, 1024, 1536],
+        # }
+
+        ## Eagle-X4-8B-Plus
         self.index2shape = {
             0: [1, 1024, 1024],
             1: [1, 1024, 3072],
-            2: [1, 1024, 1024],
+            2: [1, 1024, 1536],
             3: [1, 1024, 1024],
-            4: [1, 1024, 1536],
         }
 
     def load_model(self):

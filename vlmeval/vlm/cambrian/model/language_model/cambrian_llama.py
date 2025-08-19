@@ -65,7 +65,7 @@ class CambrianLlamaModel(CambrianMetaModel, LlamaModel):
     def __init__(self, config: LlamaConfig):
         super(CambrianLlamaModel, self).__init__(config)
 
-        self.masked_index = [0, 2]
+        self.masked_index = []
         logger.info(f"masked_index: {self.masked_index}")
 
     def forward(

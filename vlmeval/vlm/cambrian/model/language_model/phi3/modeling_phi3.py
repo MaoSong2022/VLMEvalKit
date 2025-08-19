@@ -47,7 +47,7 @@ from transformers.utils import (
 )
 from .configuration_phi3 import Phi3Config
 
-from cambrian.utils import IS_XLA_AVAILABLE
+IS_XLA_AVAILABLE = False
 
 
 logger = logging.get_logger(__name__)

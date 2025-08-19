@@ -2,8 +2,8 @@ import sys
 import torch
 from transformers import AutoModelForCausalLM
 import warnings
-from .base import BaseModel
-from ..smp import *
+from ..base import BaseModel
+from ...smp import *
 
 
 class DeepSeekVL(BaseModel):
@@ -13,7 +13,7 @@ class DeepSeekVL(BaseModel):
 
     def check_install(self):
         try:
-            import deepseek_vl
+            import vlmeval.vlm.deepsek_vl.deepseek_vl as deepseek_vl
         except Exception as e:
             logging.critical(
                 'Please first install deepseek_vl from source codes in: https://github.com/deepseek-ai/DeepSeek-VL')
@@ -23,7 +23,7 @@ class DeepSeekVL(BaseModel):
         self.check_install()
         assert model_path is not None
         self.model_path = model_path
-        from deepseek_vl.models import VLChatProcessor
+        from vlmeval.vlm.deepsek_vl.models import VLChatProcessor
 
         self.vl_chat_processor = VLChatProcessor.from_pretrained(model_path)
         self.tokenizer = self.vl_chat_processor.tokenizer
@@ -62,7 +62,7 @@ class DeepSeekVL(BaseModel):
 
     def generate_inner(self, message, dataset=None):
         conversation = self.prepare_inputs(message)
-        from deepseek_vl.utils.io import load_pil_images
+        from vlmeval.vlm.deepsek_vl.utils.io import load_pil_images
         pil_images = load_pil_images(conversation)
         prepare_inputs = self.vl_chat_processor(conversations=conversation, images=pil_images, force_batchify=True)
         prepare_inputs = prepare_inputs.to(self.model.device)

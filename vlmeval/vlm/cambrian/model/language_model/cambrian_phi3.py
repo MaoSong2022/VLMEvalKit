@@ -26,7 +26,9 @@ from transformers.generation.utils import GenerateOutput
 
 from ..cambrian_arch import CambrianMetaModel, CambrianMetaForCausalLM
 
-from cambrian.utils import IS_XLA_AVAILABLE
+from ...utils import IS_XLA_AVAILABLE
+
+from loguru import logger
 
 
 class CambrianConfig(Phi3Config):
@@ -40,6 +42,9 @@ class CambrianPhi3Model(CambrianMetaModel, Phi3Model):
 
     def __init__(self, config: Phi3Config):
         super(CambrianPhi3Model, self).__init__(config)
+
+        self.masked_index = []
+        logger.info(f"masked_index: {self.masked_index}")
 
 
 class CambrianPhi3ForCausalLM(Phi3ForCausalLM, CambrianMetaForCausalLM):

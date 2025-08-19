@@ -24,6 +24,7 @@ from loguru import logger
 
 from .language_model.cambrian_llama import CambrianLlamaForCausalLM
 from .language_model.cambrian_mistral import CambrianMistralForCausalLM
+from .language_model.cambrian_phi3 import CambrianPhi3ForCausalLM
 
 
 def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, load_4bit=False, device_map="auto", device="cuda", use_flash_attn=False, **kwargs):
@@ -107,7 +108,6 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
                     **kwargs
                 )
             elif 'phi3' in model_name.lower():
-                from cambrian.model.language_model.cambrian_phi3 import CambrianPhi3ForCausalLM
                 tokenizer = AutoTokenizer.from_pretrained(model_path)
                 model = CambrianPhi3ForCausalLM.from_pretrained(
                     model_path,
